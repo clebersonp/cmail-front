@@ -8,4 +8,17 @@ import { Component } from "@angular/core";
         './header-search.css'
     ]
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+
+    tituloHeader = "Acessando o TS com one way databinding";
+    private ativaMenu = false;
+
+    toggleMenu() {
+        // alert('Testando o click do botao com One Way data binding');
+        this.ativaMenu = !this.ativaMenu;
+    }
+
+    get isMenuOpen() {
+        return this.ativaMenu;
+    }
+}
