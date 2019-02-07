@@ -21,10 +21,13 @@
   
 
           <!-- Testando o 2 way data binding -->
-          Novo email: {{ email.destinatario }}, {{ email.assunto }}, {{ email.conteudo }}
+          <!-- Novo email: {{ email.destinatario }}, {{ email.assunto }}, {{ email.conteudo }} -->
 
           <!-- newEmail--active -->
-          <form (submit)="handleCriarEmail($event)" [ngClass]="{ 'newEmail--active' : isNewEmailFormOpen }" class="newEmail cmailForm">
+          <!-- Referencia -> #formNovoEmail="ngForm" <- diretivas -->
+          <form
+            #formNovoEmail="ngForm"
+            (submit)="handleCriarEmail($event, formNovoEmail)" [ngClass]="{ 'newEmail--active' : isNewEmailFormOpen }" class="newEmail cmailForm">
             <div class="newEmail__card demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="newEmail__titleArea mdl-card__title">
                 <h2 class="newEmail__title mdl-card__title-text">Novo Email</h2>
@@ -32,12 +35,17 @@
               <div class="newEmail__body mdl-card__supporting-text">
                 <!-- Form Fields -->
                 <!-- [Para] -->
+
+                <!-- Referencia ao objeto do angular para validar forms do FormsModel -->
+                <!-- {{ destinatario.invalid }} -->
                 <div class="cmailInputForm">
-                  <div class="mdl-textfield mdl-textfield--floating-label">
+                  <div [ngClass]="{ 'is-invalid' : destinatario.touched && destinatario.invalid }" class="mdl-textfield mdl-textfield--floating-label">
+                      <!-- Esse cara ficava dentro do input sem o FormsModule (input)="email.destinatario = $event.target.value"
+                      [value]="email.destinatario" --> 
                     <input 
-                    (input)="email.destinatario = $event.target.value"
-                    [value]="email.destinatario"  
-                    required
+                      #destinatario="ngModel"
+                      [(ngModel)]="email.destinatario"
+                      required email
                       type="email"
                       name="para"
                       id="para"
@@ -51,11 +59,17 @@
   
                 <!-- [Assunto] -->
                 <div class="cmailInputForm">
-                  <div class="mdl-textfield mdl-textfield--floating-label">
+                  <div [ngClass]="{ 'is-invalid' : assunto.touched && assunto.invalid }" class="mdl-textfield mdl-textfield--floating-label">
+                      
+                    <!-- Referencia do objeto do angular do FormsModule -->  
+                    <!-- {{ assunto.invalid }} -->
+                      
+                      <!-- Two way data binding sem o FormsModule (input)="email.assunto = $event.target.value"
+                      [value]="email.assunto" -->  
                     <input
-                    (input)="email.assunto = $event.target.value"
-                    [value]="email.assunto"  
-                    required
+                      #assunto="ngModel"
+                      [(ngModel)]="email.assunto"
+                      required
                       type="text"
                       name="assunto"
                       id="assunto"
@@ -69,10 +83,10 @@
   
                 <!-- [Conteúdo] -->
                 <div class="cmailInputForm">
-                  <div class="mdl-textfield mdl-textfield--floating-label">
+                  <div [ngClass]="{ 'is-invalid' : conteudo.touched }" class="mdl-textfield mdl-textfield--floating-label">
                     <textarea
-                      (input)="email.conteudo = $event.target.value"
-                      [value]="email.conteudo"
+                      #conteudo="ngModel"
+                      [(ngModel)]="email.conteudo"
                       name="conteudo"
                       id="conteudo"
                       placeholder=" "

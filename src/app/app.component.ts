@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -21,14 +22,18 @@ export class AppComponent {
     conteudo : ''
   };
 
-  handleCriarEmail(eventoDoForm) {
+  handleCriarEmail(eventoDoForm: Event, formNovoEmail: NgForm) {
     // mudar o comportamento default do submit para dar refresh em toda pagina
     eventoDoForm.preventDefault();
     this.emails.push(this.email);
 
-    // criando uma nova instancia e limpando o objeto
-    this.limparEmail();
+    // recuperando a referencia da diretiva(objeto) ngForm passada da view
+    if (formNovoEmail.invalid) {
+      return;
+    }
 
+    // criando uma nova instancia e limpando o objeto
+    formNovoEmail.resetForm(this.limparEmail());
     this.toogleNewEmailForm();
   }
 
