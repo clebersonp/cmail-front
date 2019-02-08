@@ -3,8 +3,8 @@
 
     <!-- para injetar o restando do codigo html -->
     <ng-content></ng-content>
-    <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
-    <label class="mdl-textfield__label" for="para">Para: </label>
+    <span class="mdl-textfield__error">Informar um {{ valorDaLabel | lowercase }} é obrigatório!</span>
+    <label class="mdl-textfield__label" for="{{ valorDaLabel | lowercase }}">{{ valorDaLabel }} </label>
     <span class="mdl-textfield__formline"></span>
   </div>
 </div>
