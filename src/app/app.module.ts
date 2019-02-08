@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -24,7 +24,8 @@ import { CmailFormInpuDirective } from './components/cmail-form-group/cmail-form
   imports: [ // modulos
     BrowserModule,
     FormsModule,
-    RouterModuleConfigurado
+    RouterModuleConfigurado,
+    ReactiveFormsModule
   ],
   providers: [], // servicos
   bootstrap: [AppComponent]

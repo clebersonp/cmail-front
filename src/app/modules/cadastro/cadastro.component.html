@@ -1,6 +1,23 @@
-<form>
+<!-- forma de acessar no ts o formCadastro. Validacao Reativas de Forms -->
+<form [formGroup]="formCadastro">
     <cmail-form-group>
         <!-- usando a diretiva que criei -->
-        <input placeholder="Nome" cmailInput>
+        <input placeholder="Nome" formControlName="nome" cmailInput>
+    </cmail-form-group>
+    <cmail-form-group>
+        <!-- usando a diretiva que criei -->
+        <input placeholder="Usuario" formControlName="usuario" cmailInput>
+    </cmail-form-group>
+    <cmail-form-group>
+        <!-- usando a diretiva que criei -->
+        <input placeholder="Senha" formControlName="senha" cmailInput>
+    </cmail-form-group>
+    <cmail-form-group>
+        <!-- usando a diretiva que criei -->
+        <input placeholder="Avatar" formControlName="avatar" cmailInput>
+    </cmail-form-group>
+    <cmail-form-group>
+        <!-- usando a diretiva que criei -->
+        <input placeholder="Telefone" formControlName="telefone" cmailInput>
     </cmail-form-group>
 </form>
