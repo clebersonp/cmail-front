@@ -8,21 +8,25 @@ import { CadastroComponent } from './modules/cadastro/cadastro.component';
 import { InboxComponent } from './modules/inbox/inbox.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RouterModuleConfigurado } from './app.routes';
+import { CmailFormGroupComponent } from './components/cmail-form-group/cmail-form-group.component';
+import { CmailFormInpuDirective } from './components/cmail-form-group/cmail-form-input.directive';
 
 @NgModule({
-  declarations: [
+  declarations: [ // aceita components, diretivas
     AppComponent,
     HeaderComponent,
     CadastroComponent,
     InboxComponent,
-    LoginComponent
+    LoginComponent,
+    CmailFormGroupComponent,
+    CmailFormInpuDirective
   ],
-  imports: [
+  imports: [ // modulos
     BrowserModule,
     FormsModule,
     RouterModuleConfigurado
   ],
-  providers: [],
+  providers: [], // servicos
   bootstrap: [AppComponent]
 })
 export class AppModule { }

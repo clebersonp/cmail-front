@@ -38,16 +38,17 @@
   </header>
 
   <nav class="mdl-navigation">
-    <a class="mdl-navigation__link">
+    <!-- routerLink eh para usar o SPA - Single page aplicacao, não percebendo o refresh da página, como se fosse o a.preventDefault() -->
+    <a class="mdl-navigation__link" routerLink="/login">
       <span class="material-icons">person</span> Login
     </a>
-    <a class="mdl-navigation__link">
+    <a class="mdl-navigation__link" routerLink="/cadastro">
       <span class="material-icons">create</span> Cadastro
     </a>
-    <a class="mdl-navigation__link">
+    <a class="mdl-navigation__link" routerLink="/inbox">
       <span class="material-icons">inbox</span> Caixa de Entrada
     </a>
-    <a class="mdl-navigation__link">
+    <a class="mdl-navigation__link" routerLink="/logout">
       <span class="material-icons">logout</span> Logout
     </a>
   </nav>
