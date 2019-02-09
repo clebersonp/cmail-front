@@ -1,23 +1,24 @@
-<!-- forma de acessar no ts o formCadastro. Validacao Reativas de Forms -->
-<form [formGroup]="formCadastro">
-    <cmail-form-group>
+<!-- forma de acessar no ts o formCadastro. Validacao Reativas de Forms, o submit p form é melhor que o click do botao -->
+<form [formGroup]="formCadastro" (submit)="handleCadastraUsuario()">
+    <cmail-form-group [campo]="formCadastro.get('nome')">
         <!-- usando a diretiva que criei -->
         <input placeholder="Nome" formControlName="nome" cmailInput>
     </cmail-form-group>
-    <cmail-form-group>
+    <cmail-form-group [campo]="formCadastro.get('username')">
         <!-- usando a diretiva que criei -->
-        <input placeholder="Usuario" formControlName="usuario" cmailInput>
+        <input placeholder="Username" formControlName="username" cmailInput>
     </cmail-form-group>
-    <cmail-form-group>
+    <cmail-form-group [campo]="formCadastro.get('senha')">
         <!-- usando a diretiva que criei -->
         <input placeholder="Senha" formControlName="senha" cmailInput>
     </cmail-form-group>
-    <cmail-form-group>
-        <!-- usando a diretiva que criei -->
-        <input placeholder="Avatar" formControlName="avatar" cmailInput>
-    </cmail-form-group>
-    <cmail-form-group>
+    <cmail-form-group [campo]="formCadastro.get('telefone')">
         <!-- usando a diretiva que criei -->
         <input placeholder="Telefone" formControlName="telefone" cmailInput>
     </cmail-form-group>
+    <cmail-form-group [campo]="formCadastro.get('avatar')">
+        <!-- usando a diretiva que criei -->
+        <input placeholder="Avatar" formControlName="avatar" cmailInput>
+    </cmail-form-group>
+    <button _ngcontent-c1="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> Cadastrar </button>
 </form>

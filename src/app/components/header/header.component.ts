@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: 'cmail-header',
@@ -12,6 +12,7 @@ export class HeaderComponent {
 
     tituloHeader = "Acessando o TS com one way databinding";
     private ativaMenu = false;
+    @Input() tituloDaPagina; // acessando o valor do campo do inbox.component.html por causa do selector <cmail-header>
 
     toggleMenu() {
         // alert('Testando o click do botao com One Way data binding');
