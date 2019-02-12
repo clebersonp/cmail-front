@@ -2,7 +2,13 @@
 <form [formGroup]="formCadastro" (submit)="handleCadastraUsuario()">
     <cmail-form-group [campo]="formCadastro.get('nome')">
         <!-- usando a diretiva que criei -->
+        <!-- {{ formCadastro.get('nome').errors | json}} depurar -->
         <input placeholder="Nome" formControlName="nome" cmailInput>
+        <span *ngIf="formCadastro.get('nome').errors && formCadastro.get('nome').errors.required" class="mdl-textfield__error">Informar um nome é obrigatório!</span>
+        <span *ngIf="formCadastro.get('nome').errors && formCadastro.get('nome').errors.minlength" class="mdl-textfield__error">
+            O nome deve conter {{ formCadastro.get('nome').errors?.minlength.requiredLength }} caracteres.
+            Você só digitou {{ formCadastro.get('nome').errors?.minlength.actualLength }}, usando Elvis Operator.
+        </span>
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('username')">
         <!-- usando a diretiva que criei -->
@@ -14,7 +20,10 @@
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('telefone')">
         <!-- usando a diretiva que criei -->
+        {{ formCadastro.get('telefone').errors | json }}
         <input placeholder="Telefone" formControlName="telefone" cmailInput>
+        <span *ngIf="formCadastro.get('telefone').errors && formCadastro.get('telefone').errors.required" class="mdl-textfield__error">O campo telefone é obrigatório.</span>
+        <span *ngIf="formCadastro.get('telefone').errors && formCadastro.get('telefone').errors.requiredPattern" class="mdl-textfield__error">Digite um número de telefone válido. Ex: 9999-99999!</span>
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('avatar')">
         <!-- usando a diretiva que criei -->
