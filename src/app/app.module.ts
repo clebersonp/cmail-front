@@ -13,8 +13,7 @@ import { ModuloRoteamento } from './app.routes';
   declarations: [ // aceita components, diretivas
     AppComponent,
     HeaderComponent,
-    InboxComponent,
-    LoginComponent
+    InboxComponent
   ],
   imports: [ // modulos
     BrowserModule,
