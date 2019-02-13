@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InboxComponent } from './modules/inbox/inbox.component';
 import { LoginComponent } from './modules/login/login.component';
-import { RouterModuleConfigurado } from './app.routes';
-import { CadastroModule } from './modules/cadastro/cadastro.module';
+import { ModuloRoteamento } from './app.routes';
+// import { CadastroModule } from './modules/cadastro/cadastro.module';
+
 @NgModule({
   declarations: [ // aceita components, diretivas
     AppComponent,
@@ -18,8 +19,8 @@ import { CadastroModule } from './modules/cadastro/cadastro.module';
   imports: [ // modulos
     BrowserModule,
     FormsModule,
-    RouterModuleConfigurado,
-    CadastroModule // importando o cadastroModule
+    ModuloRoteamento
+    // CadastroModule // importando o cadastroModule, será carregado pelo roteamento do cadastro.routes.ts
   ],
   providers: [], // servicos
   bootstrap: [AppComponent]
