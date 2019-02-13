@@ -20,14 +20,26 @@
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('telefone')">
         <!-- usando a diretiva que criei -->
-        {{ formCadastro.get('telefone').errors | json }}
+        <!-- {{ formCadastro.get('telefone').errors | json }} -->
         <input placeholder="Telefone" formControlName="telefone" cmailInput>
         <span *ngIf="formCadastro.get('telefone').errors && formCadastro.get('telefone').errors.required" class="mdl-textfield__error">O campo telefone é obrigatório.</span>
         <span *ngIf="formCadastro.get('telefone').errors && formCadastro.get('telefone').errors.requiredPattern" class="mdl-textfield__error">Digite um número de telefone válido. Ex: 9999-99999!</span>
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('avatar')">
+        <!-- {{ formCadastro.get('avatar').errors | json }} -->
         <!-- usando a diretiva que criei -->
-        <input placeholder="Avatar" formControlName="avatar" cmailInput>
+        <input placeholder="Avatar" formControlName="avatar" #urlDaImagem cmailInput>
+        <!-- <span *ngIf="formCadastro.get('avatar').hasError('required')" class="mdl-textfield__error">Informar uma url com um avatar é obrigatório!.</span> -->
+        <!-- <span *ngIf="formCadastro.get('avatar').hasError('urlInvalida')" class="mdl-textfield__error">Informar uma url com um avatar é obrigatório!.</span> -->
+        <span *ngIf="formCadastro.get('avatar').errors && formCadastro.get('avatar').errors.required" class="mdl-textfield__error">O campo avatar é obrigatório.</span>
+        <span *ngIf="formCadastro.get('avatar').errors?.urlInvalida" class="mdl-textfield__error">A URL é inválida!</span>
+        <span *ngIf="formCadastro.get('avatar').status === 'PENDING'" class="mdl-textfield__error">Validação pendente....</span>
     </cmail-form-group>
     <button _ngcontent-c1="" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"> Cadastrar </button>
+    <!-- {{ urlDaImagem | json }} -->
 </form>
+<img [src]="urlDaImagem.value" /> 
+
+<!-- projeto back end do projeto: https://github.com/caelum/cmail-back -->
+<!-- Acessa o projeto -->
+<!-- Roda o comando 'npm install' para baixar as dependencias do projeto descritas no arquivo package.json -->

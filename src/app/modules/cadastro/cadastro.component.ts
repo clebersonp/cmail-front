@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastro',
@@ -44,28 +44,59 @@ export class CadastroComponent {
       username: new FormControl('', [Validators.required]),
       senha: new FormControl('', [Validators.required]),
       telefone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{4}-?[0-9]{4}[0-9]?$')]),
-      avatar: new FormControl('', [Validators.required], this.validaImagen.bind(this)),
+      avatar: new FormControl('', [Validators.required], this.validaImagem.bind(this)),
     });
   }
 
 
+  // Explicar o Bind: 
+
   // validaImagem(elementoHtml).subscribe();
-
-  validaImagen(formControl) {
+  validaImagem(formControl) {
     console.log(formControl);
-    const evento = this.httpClient.head(formControl.value), { observe: 'response' })
-      .pipe( // Estruturar nossa lógica aqui no meio
-           map(function(dadoQueVeioDoServer) {
-            const isValidImage = dadoQueVeioDoServer.headers.get('Content-Type').includes('jpeg');
-           })
-       )
-  }
+    const evento = this.httpClient.head(formControl.value, { observe: 'response' })
+    .pipe( // Estruturar nossa lógica aqui no meio
+           map( function(dadoQueVeioDoServer) {
+            const isValidImage = dadoQueVeioDoServer
+                                        .headers
+                                        .get('Content-Type')
+                                        .includes('jpeg');
 
+            console.log('isValidImage: ', isValidImage);
+            return isValidImage ? null : { urlInvalida : true };
+           }),
+           catchError( function(error) {
+             console.log(error);
+             return [{ urlInvalida: true }];
+           })
+       );
+       return evento;
+  }
 
   handleCadastraUsuario() {
 
     if (this.formCadastro.valid) {
       console.log("Manda para o banco de dados");
+
+      // DTO do usuario
+      const usuarioDto = {
+        name : this.formCadastro.value.nome,
+        username : this.formCadastro.value.username,
+        password : this.formCadastro.value.senha,
+        phone : this.formCadastro.value.telefone,
+        avatar : this.formCadastro.value.avatar
+      };
+
+      // API Rest
+      this.httpClient.post('http://localhost:3200/users', usuarioDto, { observe : 'response' })
+        .subscribe((dadosDoServer) => {
+          console.log(dadosDoServer);
+        }, (errors) => {
+          console.log("Erros do servidor: ", errors);
+        }, () => {
+          console.log("Retorno do servidor quando it's done!")
+          this.formCadastro.reset({onlySelf: true});
+        });
     } else {
       // preciso tocar todos os campos para poder validar tbm
       console.log("Faz um redirect");
