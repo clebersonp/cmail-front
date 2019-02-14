@@ -7,10 +7,36 @@
           <h1 class="mdl-card__title-text">Bem vindos/as ao CMail!</h1>
         </header>
   
-        <form autocomplete="off" class="mdl-card__supporting-text">
+        <form #formLoginEmail="ngForm"
+          (submit)="handleLogarEmail($event, formLoginEmail)" autocomplete="off" class="mdl-card__supporting-text">
   
           <!-- aqui os campos do formulário -->
-  
+          <cmail-form-group [campo]="dadoDoEmail">
+            
+            {{ dadoDoEmail.errors | json }}
+            
+            <input
+              [(ngModel)]="dadosLogin.email"
+              placeholder="E-mail"
+              type="email"
+              name="email"
+              #dadoDoEmail="ngModel"
+              required email cmailInput>
+
+            <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
+          </cmail-form-group>
+          
+          <cmail-form-group [campo]="dadoDaSenha">
+            <input
+              [(ngModel)]="dadosLogin.senha"
+              placeholder="Senha"
+              type="password"
+              name="senha"
+              #dadoDaSenha="ngModel"
+              required cmailInput>
+
+            <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
+          </cmail-form-group>
           <div class="mdl-card__actions mdl-card--border">
             <a routerLink="cadastro" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
               Primeiro login? Cadastre-se!

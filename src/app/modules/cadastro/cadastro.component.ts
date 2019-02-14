@@ -60,7 +60,12 @@ export class CadastroComponent {
             const isValidImage = dadoQueVeioDoServer
                                         .headers
                                         .get('Content-Type')
-                                        .includes('jpeg');
+                                        .includes('jpeg')
+                                        ||
+                                        dadoQueVeioDoServer
+                                        .headers
+                                        .get('Content-Type')
+                                        .includes('png');
 
             console.log('isValidImage: ', isValidImage);
             return isValidImage ? null : { urlInvalida : true };

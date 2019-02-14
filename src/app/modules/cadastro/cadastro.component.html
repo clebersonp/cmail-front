@@ -13,10 +13,12 @@
     <cmail-form-group [campo]="formCadastro.get('username')">
         <!-- usando a diretiva que criei -->
         <input placeholder="Username" formControlName="username" cmailInput>
+        <span *ngIf="formCadastro.get('username').errors && formCadastro.get('username').errors.required" class="mdl-textfield__error">O campo username é obrigatório.</span>
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('senha')">
         <!-- usando a diretiva que criei -->
         <input placeholder="Senha" formControlName="senha" cmailInput>
+        <span *ngIf="formCadastro.get('senha').errors && formCadastro.get('senha').errors.required" class="mdl-textfield__error">O campo senha é obrigatório.</span>
     </cmail-form-group>
     <cmail-form-group [campo]="formCadastro.get('telefone')">
         <!-- usando a diretiva que criei -->

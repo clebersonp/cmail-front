@@ -1,20 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'
 
-import { CmailFormGroupComponent } from '../components/cmail-form-group/cmail-form-group.component';
-import { CmailFormInpuDirective } from '../components/cmail-form-group/cmail-form-input.directive';
+import { CmailFormGroupModule } from '../components/cmail-form-group/cmail-form-group.module';
 
 @NgModule({
-    declarations: [
-        CmailFormGroupComponent,
-        CmailFormInpuDirective
-    ],
     imports: [
-        CommonModule
+        CommonModule,
+        CmailFormGroupModule
     ],
     exports: [
-        CmailFormGroupComponent,
-        CmailFormInpuDirective
+        CmailFormGroupModule
     ]
 })
 export class SharedThingsModule {}
