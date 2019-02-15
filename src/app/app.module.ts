@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InboxComponent } from './modules/inbox/inbox.component';
 import { ModuloRoteamento } from './app.routes';
-import { AuthGuardGeral } from './shared/auth/auth-guard-geral'
+import { AuthGuardGeral } from './shared/auth/auth-guard-geral';
+import { EmailService } from './modules/inbox/services/email.service';
+import { LoginService } from './modules/login/login.service';
 // import { CadastroModule } from './modules/cadastro/cadastro.module';
 
 @NgModule({
   declarations: [ // aceita components, diretivas
-    AppComponent,
-    HeaderComponent,
-    InboxComponent
+    AppComponent
   ],
   imports: [ // modulos
     BrowserModule,

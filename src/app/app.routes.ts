@@ -13,7 +13,7 @@ const rotas : Routes = [
     { path: 'login', redirectTo: '' },
     // { path: 'cadastro', component: CadastroComponent },
     { path: 'cadastro', loadChildren: 'src/app/modules/cadastro/cadastro.module#CadastroModule' }, // vai carregar sobre demanda, ou seja, somente quando chamar a url http://localhost:4200/cadastro
-    { path: 'inbox', component: InboxComponent,
+    { path: 'inbox', loadChildren: 'src/app/modules/inbox/inbox.module#InboxModule',
         canActivate: [ AuthGuardGeral ] // passando autenticacao da rota para a pagina do inbox
     },
     { path: '*', redirectTo: ''}, // ou cria uma página 404

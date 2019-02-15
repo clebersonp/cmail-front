@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { EmailService } from './services/email.service';
 
 @Component({
   selector: 'app-inbox',
@@ -9,6 +11,8 @@ import { NgForm } from '@angular/forms';
 export class InboxComponent {
   title = 'cmail-front';
   private _isNewEmailFormOpen = false;
+
+  constructor(private emailService: EmailService) {}
 
   emails = [
     {assunto : "Assunto 1", destinatario : "joao.silva@cmail.com", conteudo : "Conteúdo do email"},
@@ -23,17 +27,28 @@ export class InboxComponent {
   };
 
   handleCriarEmail(eventoDoForm: Event, formNovoEmail: NgForm) {
-    // mudar o comportamento default do submit para dar refresh em toda pagina
-    eventoDoForm.preventDefault();
-    this.emails.push(this.email);
-
     // recuperando a referencia da diretiva(objeto) ngForm passada da view
     if (formNovoEmail.invalid) {
       return;
     }
+    
+    const emailDTO = {
+      to: this.email.destinatario,
+      subject: this.email.assunto,
+      content: this.email.conteudo
+     };
+     
+      this.emailService.criarEmail(emailDTO)
+        .subscribe((dadosDoServer) => {
+            console.log(dadosDoServer);
+            this.emails.push(this.email);
+            eventoDoForm.preventDefault();
+            formNovoEmail.resetForm(this.limparEmail());
+      });
+    
+    // mudar o comportamento default do submit para dar refresh em toda pagina
 
     // criando uma nova instancia e limpando o objeto
-    formNovoEmail.resetForm(this.limparEmail());
     this.toogleNewEmailForm();
   }
 
