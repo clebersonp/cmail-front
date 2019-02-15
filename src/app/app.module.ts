@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InboxComponent } from './modules/inbox/inbox.component';
 import { ModuloRoteamento } from './app.routes';
+import { AuthGuardGeral } from './shared/auth/auth-guard-geral'
 // import { CadastroModule } from './modules/cadastro/cadastro.module';
 
 @NgModule({
@@ -20,7 +21,7 @@ import { ModuloRoteamento } from './app.routes';
     ModuloRoteamento
     // CadastroModule // importando o cadastroModule, será carregado pelo roteamento do cadastro.routes.ts
   ],
-  providers: [], // servicos
+  providers: [AuthGuardGeral], // servicos e outras classes
   bootstrap: [AppComponent]
 })
 export class AppModule { }

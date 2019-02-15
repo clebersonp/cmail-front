@@ -5,6 +5,7 @@ import { LoginRoutesModule } from './login-routes.module';
 import { FormsModule } from '@angular/forms';
 import { SharedThingsModule } from 'src/app/shared/shared-things.module';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './login.service'
 
 @NgModule({
     declarations: [
@@ -16,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
         FormsModule,
         SharedThingsModule,
         HttpClientModule
+    ],
+    providers: [
+        LoginService // o angular vai gerenciar essa classe de service para nos
     ]
 })
 export class LoginModule {}
