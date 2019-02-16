@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { HeaderDataService } from './header-data.service';
 
 @Component({
     selector: 'cmail-header',
@@ -14,6 +15,8 @@ export class HeaderComponent {
     private ativaMenu = false;
     @Input() tituloDaPagina; // acessando o valor do campo do inbox.component.html por causa do selector <cmail-header>
 
+    constructor(private headerDataService: HeaderDataService) {}
+
     toggleMenu() {
         // alert('Testando o click do botao com One Way data binding');
         this.ativaMenu = !this.ativaMenu;
@@ -24,6 +27,7 @@ export class HeaderComponent {
     }
 
     handleInputSearch(dadoAtualDoCampoDeBusca: string) {
-        console.log(dadoAtualDoCampoDeBusca);
+        // BroadCas de dados via servico
+        this.headerDataService.updateHeaderSearchValue(dadoAtualDoCampoDeBusca);        
     }
 }

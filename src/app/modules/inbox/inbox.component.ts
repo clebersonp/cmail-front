@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmailService } from './services/email.service';
+import { HeaderDataService } from 'src/app/components/header/header-data.service';
 
 @Component({
   selector: 'app-inbox',
@@ -11,6 +12,7 @@ export class InboxComponent implements OnInit {
   
   title = 'cmail-front';
   private _isNewEmailFormOpen = false;
+  valorDoFiltro = '';
   emails = [];
   // email sera usado com o way 2 data binding
   email = {
@@ -20,13 +22,19 @@ export class InboxComponent implements OnInit {
     dataCriacao: ''
   };
 
-  constructor(private emailService: EmailService) {}
+  // headerDataService é o emissor de evento digitado pelo input search do header, pois não consegue passar direto o valor de um component interno para o externo, o header está dentro do Inbox
+  constructor(private emailService: EmailService, private headerDataService: HeaderDataService) {}
 
   ngOnInit() { // é executado logo apos carregar os componentes da pagina, depois do constructor
     console.log("Carregando os email do server");
     this.emailService.pegaTodos().subscribe((emailsDoServer) => {
       this.emails = emailsDoServer;
     });
+
+    this.headerDataService.listenHeaderSearchChanger()
+      .subscribe((valor) => {
+        this.valorDoFiltro = valor
+      });
   }
 
   handleCriarEmail(eventoDoForm: Event, formNovoEmail: NgForm) {

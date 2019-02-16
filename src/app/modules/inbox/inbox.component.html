@@ -10,7 +10,7 @@
       <!-- | pipe do angular, angular date pipe -> DOC: https://angular.io/api/common/DatePipe -->
       <ul>
         <!-- | criando nosso propio pipe chamado filtraPorAssunto -->
-          <li *ngFor="let email of emails | filtraPorAssunto: campoBusca.value">
+          <li *ngFor="let email of emails | filtraPorAssunto: valorDoFiltro">
               {{ email.assunto }},
               {{ email.destinatario }},
               {{ email.conteudo }},
