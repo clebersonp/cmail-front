@@ -6,14 +6,15 @@ import { InboxRoutesModule } from './inbox-routes.module';
 import { FormsModule } from '@angular/forms';
 import { SharedThingsModule } from 'src/app/shared/shared-things.module';
 import { EmailService } from './services/email.service';
-import { CmailFormGroupComponent } from 'src/app/components/cmail-form-group/cmail-form-group.component';
 import { CmailFormGroupModule } from 'src/app/components/cmail-form-group/cmail-form-group.module';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { FiltraPorAssuntoPipe } from 'src/app/shared/pipes/filtraPorAssunto.pipe';
 
 @NgModule({
     declarations:[
         InboxComponent,
-        HeaderComponent
+        HeaderComponent,
+        FiltraPorAssuntoPipe
     ],
     imports: [
         CommonModule,

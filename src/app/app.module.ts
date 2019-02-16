@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { InboxComponent } from './modules/inbox/inbox.component';
 import { ModuloRoteamento } from './app.routes';
 import { AuthGuardGeral } from './shared/auth/auth-guard-geral';
-import { EmailService } from './modules/inbox/services/email.service';
-import { LoginService } from './modules/login/login.service';
+import { FiltraPorAssuntoPipe } from './shared/pipes/filtraPorAssunto.pipe';
+import { InboxModule } from './modules/inbox/inbox.module';
 // import { CadastroModule } from './modules/cadastro/cadastro.module';
 
 @NgModule({

@@ -3,12 +3,18 @@
   <main class="mdl-layout__content">
     <div class="page-content">
 
+      <!-- (input) evento do angular, #campoBusca -> para recuperar o valor do campo digitado e utilizar em outros lugares -->
+      <input (input)="0" #campoBusca type="text" />
+
       <!-- Adicionar a listagem de emails -->
+      <!-- | pipe do angular, angular date pipe -> DOC: https://angular.io/api/common/DatePipe -->
       <ul>
-          <li *ngFor="let email of emails">
+        <!-- | criando nosso propio pipe chamado filtraPorAssunto -->
+          <li *ngFor="let email of emails | filtraPorAssunto: campoBusca.value">
               {{ email.assunto }},
               {{ email.destinatario }},
-              {{ email.conteudo }}
+              {{ email.conteudo }},
+              {{ email.dataCriacao | date: 'dd/MM/yyyy HH:mm:ss' }}
           </li>
       </ul>
 
@@ -83,7 +89,7 @@
 
               <!-- [Conteúdo] -->
               <div class="cmailInputForm">
-                <div [ngClass]="{ 'is-invalid' : conteudo.touched }" class="mdl-textfield mdl-textfield--floating-label">
+                <div [ngClass]="{ 'is-invalid' : conteudo.touched && conteudo.invalid }" class="mdl-textfield mdl-textfield--floating-label">
                   <textarea
                     #conteudo="ngModel"
                     [(ngModel)]="email.conteudo"

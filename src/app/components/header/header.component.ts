@@ -22,4 +22,8 @@ export class HeaderComponent {
     get isMenuOpen() {
         return this.ativaMenu;
     }
+
+    handleInputSearch(dadoAtualDoCampoDeBusca: string) {
+        console.log(dadoAtualDoCampoDeBusca);
+    }
 }

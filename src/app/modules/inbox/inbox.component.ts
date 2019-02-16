@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { EmailService } from './services/email.service';
 
 @Component({
@@ -8,26 +7,31 @@ import { EmailService } from './services/email.service';
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.css']
 })
-export class InboxComponent {
+export class InboxComponent implements OnInit {
+  
   title = 'cmail-front';
   private _isNewEmailFormOpen = false;
-
-  constructor(private emailService: EmailService) {}
-
-  emails = [
-    {assunto : "Assunto 1", destinatario : "joao.silva@cmail.com", conteudo : "Conteúdo do email"},
-    {assunto : "Assunto 2", destinatario : "carlos.aleman@cmail.com", conteudo : "Conteúdo do email"},
-  ];
-
+  emails = [];
   // email sera usado com o way 2 data binding
   email = {
     assunto : '',
     destinatario : '',
-    conteudo : ''
+    conteudo : '',
+    dataCriacao: ''
   };
+
+  constructor(private emailService: EmailService) {}
+
+  ngOnInit() { // é executado logo apos carregar os componentes da pagina, depois do constructor
+    console.log("Carregando os email do server");
+    this.emailService.pegaTodos().subscribe((emailsDoServer) => {
+      this.emails = emailsDoServer;
+    });
+  }
 
   handleCriarEmail(eventoDoForm: Event, formNovoEmail: NgForm) {
     // recuperando a referencia da diretiva(objeto) ngForm passada da view
+    eventoDoForm.preventDefault();
     if (formNovoEmail.invalid) {
       return;
     }
@@ -39,10 +43,9 @@ export class InboxComponent {
      };
      
       this.emailService.criarEmail(emailDTO)
-        .subscribe((dadosDoServer) => {
-            console.log(dadosDoServer);
-            this.emails.push(this.email);
-            eventoDoForm.preventDefault();
+        .subscribe((emailDoServer) => {
+            console.log("Dados do server", emailDoServer);
+            this.emails.push(emailDoServer);
             formNovoEmail.resetForm(this.limparEmail());
       });
     
@@ -56,7 +59,8 @@ export class InboxComponent {
     this.email = {
       assunto : '',
       destinatario : '',
-      conteudo : ''
+      conteudo : '',
+      dataCriacao: ''
     }
   }
   
